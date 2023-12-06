@@ -61,7 +61,6 @@ int main(){
                 if(head == NULL){
                     printf("Underflow.");
                 }else{
-                    printf("%d",head->data);
                     printf("Removed element is %d\n",pop(&head));
                 }
                 break;
@@ -82,3 +81,55 @@ int main(){
     return 0;
 }
 
+
+/*OUTPUT
+
+PS S:\WorkSpace\CollegeWork\DataStructure> gcc '.\queue-using-linkedlist copy.c'
+PS S:\WorkSpace\CollegeWork\DataStructure> ./a
+
+1.Push
+2.Pop
+3.Display
+4.Exit
+Enter Your choice: 1
+Enter data of node: 12
+
+1.Push
+2.Pop
+3.Display
+4.Exit
+Enter Your choice: 1
+Enter data of node: 13
+
+1.Push
+2.Pop
+3.Display
+4.Exit
+Enter Your choice: 1
+Enter data of node: 14
+
+1.Push
+2.Pop
+3.Display
+4.Exit
+Enter Your choice: 3
+The elements of stack are: 14 13 12
+1.Push
+2.Pop
+3.Display
+4.Exit
+Enter Your choice: 2
+14Removed element is 12
+
+1.Push
+2.Pop
+3.Display
+4.Exit
+Enter Your choice: 3
+The elements of stack are: 14 13
+1.Push
+2.Pop
+3.Display
+4.Exit
+Enter Your choice: 4
+PS S:\WorkSpace\CollegeWork\DataStructure>*/
