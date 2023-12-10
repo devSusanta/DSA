@@ -308,13 +308,53 @@ lkdlist *sort_marge(lkdlist *head1, lkdlist *head2){
 }
 
 void replace(lkdlist *head, int old_data, int new_data){
-    
+    if(isEmpty(head)){
+        printf("No Element Found to Replace.\n");
+        return;
+    }
+    lkdlist *temp = head;
+    while(temp){
+        if(temp->data == old_data){
+            temp->data = new_data;
+            return;
+        }
+        temp = temp->next;
+    }
+    printf("No Element Found to Replace.\n");
 }
 
-void replace_at(lkdlist *head, int new_data, int index){
+void replace_at(lkdlist *head, int index, int new_data){
+    if(isEmpty(head)){
+        printf("No Element Found to Replace.\n");
+        return;
+    }
 
+    int i = 0;
+    lkdlist *temp = head;
+    while(temp){
+        if(i == index){
+            temp->data = new_data;
+            return;
+        }
+        i++;
+        temp = temp->next;
+    }
+    printf("No Element Found to Replace.\n");
 }
 
 void replaceAll(lkdlist *head, int old_data, int new_data){
-    
+    if(isEmpty(head)){
+        printf("No Element Found to Replace.\n");
+        return;
+    }
+    lkdlist *temp = head;
+    int placed = 0;
+    while(temp){
+        if(temp->data == old_data){
+            temp->data = new_data;
+            placed++;
+        }
+        temp = temp->next;
+    }
+    if(!placed)printf("No Element Found to Replace.\n");
 }

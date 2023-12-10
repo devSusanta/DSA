@@ -2,11 +2,13 @@
 
 int main(){
     lkdlist *st1 = NULL;
-    int n = 100;
+    int n = 20;
     for(int i = 0; i < n; i++){
         push_top(&st1,i);
     }
-    reverse_list(&st1);
+    push_top(&st1, 10);
+    push_top(&st1, 10);
+    replace_at(st1, 21, 100);
     display(st1);
     if(isExist(st1,10)){
         printf("Element Found.");
