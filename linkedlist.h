@@ -25,8 +25,16 @@ int len(lkdlist *head){
     return count;
 }
 
-int count(lkdlist *head){
-    
+int count(lkdlist *head, int key){
+    lkdlist *temp = head;
+    int count = 0;
+    while(temp){
+        if(temp->data == key){
+            count++;
+        }
+        temp = temp->next;
+    }
+    return count;
 }
 
 int item_at(lkdlist *head,int index){
@@ -75,6 +83,7 @@ void push(lkdlist **head, int new_data, int index){
     prev->next = new_node;
     new_node->next = temp;
 }
+
 void push_top(lkdlist **head, int new_data) {
     push(head,new_data,0);
 }
@@ -84,8 +93,58 @@ void push_bottom(lkdlist **head, int new_data){
     push(head,new_data,l);
 }
 
-void pop_at(lkdlist **head, int index){
+void sort_push(lkdlist **head, int new_data){
+    lkdlist *new_node = (lkdlist*)malloc(sizeof(lkdlist));
+    new_node->data = new_data;
+    if(!(*head) || (*head)->data > new_node->data){
+        new_node->next = *head;
+        *head = new_node;
+        return;
+    }
+    lkdlist *temp = *head, *prev;
+    while(temp->next != NULL){
+        prev = temp;
+        temp = temp->next;
+        if(temp->data >= new_node->data){
+            prev->next = new_node;
+            new_node->next = temp;
+            return;
+        }
+    }
+    temp->next = new_node;
+    new_node->next = NULL;
+}
 
+int pop_at(lkdlist **head, int index){
+    if(isEmpty(*head)){
+        printf("No Element Found.\n");
+        return -1;
+    }
+
+    if(len(*head) < index || index < 0){
+        printf("Index Out of Range %d\n",len(*head));
+        return -1;
+    }
+
+    lkdlist *temp = *head, *prev;
+    int i = 0;
+    int data;
+    if(i == index){
+        data = temp->data;
+        *head = temp->next;
+        free(temp);
+        return data;
+    }
+
+    while(i < index){
+        prev = temp;
+        temp = temp->next;
+        i++;
+    }
+    prev->next = temp->next;
+    data = temp->data;
+    free(temp);
+    return data;
 }
 
 void pop(lkdlist **head, int key) {
@@ -113,14 +172,7 @@ void pop(lkdlist **head, int key) {
 }
 
 int pop_top(lkdlist **head) {
-    if(isEmpty(*head)){
-        return -1;
-    }
-    lkdlist *temp = *head;
-    int data = (*head)->data;
-    *head = temp->next;
-    free(temp);
-    return data;
+    pop_at(head,0);
 }
 
 int pop_bottom(lkdlist **head){
@@ -155,5 +207,114 @@ void display(lkdlist *head) {
     printf("NULL\n");
 }
 
+int isExist(lkdlist *head, int key){
+    if(isEmpty(head)){
+        return 0;
+    }
+    lkdlist *temp = head;
+    while(temp){
+        if(temp->data == key){
+            return 1;
+        }
+        temp = temp->next;
+    }
+    return 0;
+}
 
+void del_List(lkdlist **head){
+    lkdlist *temp = (*head)->next, *prev;
+    while(temp){
+        prev = temp;
+        temp = temp->next;
+        free(prev);
+    }
+    free(temp);
+    (*head) = NULL;
+}
 
+void sort_list(lkdlist **head){
+    if(isEmpty(*head)){
+        printf("No Element Found.\n");
+        return;
+    }
+    lkdlist *temp = *head, *prev, *new_head = NULL;
+    while(temp){
+        sort_push(&new_head,temp->data);
+        prev = temp;
+        temp = temp->next;
+        free(prev);
+    }
+    *head = new_head;
+    free(temp);
+}
+
+void reverse_list(lkdlist **head){
+    if(!(*head)){
+        printf("No Element to Reverse.\n");
+        return;
+    }
+    lkdlist *temp = *head, *prev = NULL, *new_head = NULL;
+    while(temp){
+        new_head = temp;
+        temp = temp->next;
+        new_head->next = prev;
+        prev = new_head;
+    }
+    *head = new_head;
+}
+
+/*void reverse_list(lkdlist **head){
+    if(!(*head)){
+        printf("No Element to Reverse.\n");
+        return;
+    }
+    lkdlist *temp = *head, *prev, *new_head = NULL;
+    while(temp){
+        push_top(&new_head,temp->data);
+        prev = temp;
+        temp = temp->next;
+        free(prev);
+    }
+    *head = new_head;
+    free(temp);
+}*/
+
+lkdlist *merge(lkdlist *head1, lkdlist *head2){
+    lkdlist *temp1 = head1, *temp2 = head2;
+    lkdlist *head = NULL;
+    while(temp1){
+        push_bottom(&head,temp1->data);
+        temp1 = temp1->next;
+    }
+    while(temp2){
+        push_bottom(&head,temp2->data);
+        temp2 = temp2->next;
+    }
+    return head;
+}
+
+lkdlist *sort_marge(lkdlist *head1, lkdlist *head2){
+    lkdlist *temp1 = head1, *temp2 = head2;
+    lkdlist *head = NULL;
+    while(temp1){
+        sort_push(&head,temp1->data);
+        temp1 = temp1->next;
+    }
+    while(temp2){
+        sort_push(&head,temp2->data);
+        temp2 = temp2->next;
+    }
+    return head;
+}
+
+void replace(lkdlist *head, int old_data, int new_data){
+    
+}
+
+void replace_at(lkdlist *head, int new_data, int index){
+
+}
+
+void replaceAll(lkdlist *head, int old_data, int new_data){
+    
+}
