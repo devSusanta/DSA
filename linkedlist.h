@@ -16,23 +16,21 @@ int isEmpty(lkdlist *head){
 }
 
 int len(lkdlist *head){
-    lkdlist *temp = head;
     int count = 0;
-    while(temp){
-        temp = temp->next;
+    while(head){
+        head = head->next;
         count++;
     }
     return count;
 }
 
 int count(lkdlist *head, int key){
-    lkdlist *temp = head;
     int count = 0;
-    while(temp){
-        if(temp->data == key){
+    while(head){
+        if(head->data == key){
             count++;
         }
-        temp = temp->next;
+        head = head->next;
     }
     return count;
 }
@@ -43,12 +41,11 @@ int item_at(lkdlist *head,int index){
         return -1;
     }
     int count = 1;
-    lkdlist *temp = head;
     while(count <= index){
-        temp = temp->next;
+        head = head->next;
         count++;
     }
-    return temp->data;
+    return head->data;
 }
 
 int top(lkdlist *head){
@@ -198,11 +195,9 @@ int pop_bottom(lkdlist **head){
 }
 
 void display(lkdlist *head) {
-    lkdlist *temp = head;
-
-    while (temp != NULL) {
-        printf("%d -> ", temp->data);
-        temp = temp->next;
+    while (head != NULL) {
+        printf("%d -> ", head->data);
+        head = head->next;
     }
     printf("NULL\n");
 }
@@ -211,25 +206,13 @@ int isExist(lkdlist *head, int key){
     if(isEmpty(head)){
         return 0;
     }
-    lkdlist *temp = head;
-    while(temp){
-        if(temp->data == key){
+    while(head){
+        if(head->data == key){
             return 1;
         }
-        temp = temp->next;
+        head = head->next;
     }
     return 0;
-}
-
-void del_List(lkdlist **head){
-    lkdlist *temp = (*head)->next, *prev;
-    while(temp){
-        prev = temp;
-        temp = temp->next;
-        free(prev);
-    }
-    free(temp);
-    (*head) = NULL;
 }
 
 void sort_list(lkdlist **head){
@@ -280,31 +263,38 @@ void reverse_list(lkdlist **head){
 }*/
 
 lkdlist *merge(lkdlist *head1, lkdlist *head2){
-    lkdlist *temp1 = head1, *temp2 = head2;
     lkdlist *head = NULL;
-    while(temp1){
-        push_bottom(&head,temp1->data);
-        temp1 = temp1->next;
+    while(head1){
+        push_bottom(&head,head1->data);
+        head1 = head1->next;
     }
-    while(temp2){
-        push_bottom(&head,temp2->data);
-        temp2 = temp2->next;
+    while(head2){
+        push_bottom(&head,head2->data);
+        head2 = head2->next;
     }
     return head;
 }
 
-lkdlist *sort_marge(lkdlist *head1, lkdlist *head2){
-    lkdlist *temp1 = head1, *temp2 = head2;
+lkdlist *sort_merge(lkdlist *head1, lkdlist *head2){
     lkdlist *head = NULL;
-    while(temp1){
-        sort_push(&head,temp1->data);
-        temp1 = temp1->next;
+    while(head1){
+        sort_push(&head,head1->data);
+        head1 = head1->next;
     }
-    while(temp2){
-        sort_push(&head,temp2->data);
-        temp2 = temp2->next;
+    while(head2){
+        sort_push(&head,head2->data);
+        head2 = head2->next;
     }
     return head;
+}
+
+lkdlist *copy_list(lkdlist *head){
+    lkdlist *new_head = NULL;
+    while(head){
+        push_bottom(&new_head,head->data);
+        head = head->next;
+    }
+    return new_head;
 }
 
 void replace(lkdlist *head, int old_data, int new_data){
@@ -312,13 +302,12 @@ void replace(lkdlist *head, int old_data, int new_data){
         printf("No Element Found to Replace.\n");
         return;
     }
-    lkdlist *temp = head;
-    while(temp){
-        if(temp->data == old_data){
-            temp->data = new_data;
+    while(head){
+        if(head->data == old_data){
+            head->data = new_data;
             return;
         }
-        temp = temp->next;
+        head = head->next;
     }
     printf("No Element Found to Replace.\n");
 }
@@ -330,14 +319,13 @@ void replace_at(lkdlist *head, int index, int new_data){
     }
 
     int i = 0;
-    lkdlist *temp = head;
-    while(temp){
+    while(head){
         if(i == index){
-            temp->data = new_data;
+            head->data = new_data;
             return;
         }
         i++;
-        temp = temp->next;
+        head = head->next;
     }
     printf("No Element Found to Replace.\n");
 }
@@ -347,14 +335,13 @@ void replaceAll(lkdlist *head, int old_data, int new_data){
         printf("No Element Found to Replace.\n");
         return;
     }
-    lkdlist *temp = head;
     int placed = 0;
-    while(temp){
-        if(temp->data == old_data){
-            temp->data = new_data;
+    while(head){
+        if(head->data == old_data){
+            head->data = new_data;
             placed++;
         }
-        temp = temp->next;
+        head = head->next;
     }
     if(!placed)printf("No Element Found to Replace.\n");
 }
