@@ -119,7 +119,7 @@ int pop_at(lkdlist **head, int index){
     }
 
     if(len(*head) < index || index < 0){
-        printf("Index Out of Range %d\n",len(*head));
+        printf("Index Out of Range.\n");
         return -1;
     }
 
