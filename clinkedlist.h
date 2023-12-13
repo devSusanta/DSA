@@ -228,25 +228,48 @@ void display(cl_list *head){
 }
 
 void sort_list(cl_list **head){
-    if(!head){
-        printf("List is Empty.(No Element Found)\n");
+    if(!*head){
         return;
     }
-    cl_list *new_head = NULL;
-    cl_list *temp = *head, *prev;
-    while(temp->next != *head){
-        prev = temp;
-        sort_push(&new_head,temp->data);
-        temp = temp->next;
-        free(prev);
+    cl_list *temp = *head;
+    int isSorted = 1;
+    int x = 0;
+    while(isSorted){
+        isSorted = 1;
+        while(temp->next != *head){
+            if(temp->data > temp->next->data){
+                x = temp->data;
+                temp->data = temp->next->data;
+                temp->next->data = x;
+                isSorted++;
+            }
+            temp = temp->next;
+        }
+        isSorted--;
+        temp = *head;
     }
-    sort_push(&new_head,temp->data);
-    *head = new_head;
-    free(temp);
-    temp = NULL;
-    prev = NULL;
-    
 }
+
+// void sort_list(cl_list **head){
+//     if(!head){
+//         printf("List is Empty.(No Element Found)\n");
+//         return;
+//     }
+//     cl_list *new_head = NULL;
+//     cl_list *temp = *head, *prev;
+//     while(temp->next != *head){
+//         prev = temp;
+//         sort_push(&new_head,temp->data);
+//         temp = temp->next;
+//         free(prev);
+//     }
+//     sort_push(&new_head,temp->data);
+//     *head = new_head;
+//     free(temp);
+//     temp = NULL;
+//     prev = NULL;
+    
+// }
 
 void reverse_list(cl_list **head) {
     if (!*head) {

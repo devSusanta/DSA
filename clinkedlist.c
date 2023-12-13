@@ -7,6 +7,6 @@ void main(){
         push_top(&ll1,i);
     }
     display(ll1);
-    reverse_list(&ll1);
+    sort_list(&ll1);
     display(ll1);
 }
