@@ -6,10 +6,7 @@ void main(){
     for(int i = 0; i < n; i+=2){
         push_top(&ll1,i);
     }
-    ll2 = copy_list(ll1);
-    cl_list *ll3 = ll1;
-    replace(ll1,10,100);
     display(ll1);
-    display(ll2);
-    display(ll3);
+    reverse_list(&ll1);
+    display(ll1);
 }

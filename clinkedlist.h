@@ -248,24 +248,46 @@ void sort_list(cl_list **head){
     
 }
 
-void reverse_list(cl_list **head){
-    if(!*head){
+void reverse_list(cl_list **head) {
+    if (!*head) {
         printf("No Element Found to Reverse.\n");
         return;
     }
-    cl_list *temp = *head, *prev;
-    cl_list *new_head = NULL;
-    while(temp->next != *head){
-        prev = temp;
-        push_top(&new_head,temp->data);
-        temp = temp->next;
-        free(prev);
-    }
-    push_top(&new_head,temp->data);
-    *head = new_head;
-    free(temp);
-    temp = prev = NULL;
+
+    cl_list *current = *head;
+    cl_list *prev = NULL;
+    cl_list *next;
+
+    do {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    } while (current != *head);
+
+    (*head)->next = prev;
+
+    *head = prev;
 }
+
+// void reverse_list(cl_list **head){
+//     if(!*head){
+//         printf("No Element Found to Reverse.\n");
+//         return;
+//     }
+//     cl_list *temp = *head, *prev;
+//     cl_list *new_head = NULL;
+//     while(temp->next != *head){
+//         prev = temp;
+//         push_top(&new_head,temp->data);
+//         temp = temp->next;
+//         free(prev);
+//     }
+//     push_top(&new_head,temp->data);
+//     *head = new_head;
+//     free(temp);
+//     temp = prev = NULL;
+// }
 
 cl_list *merge(cl_list *head1, cl_list *head2){
     cl_list *new_head = NULL;
