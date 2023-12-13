@@ -216,20 +216,43 @@ int isExist(lkdlist *head, int key){
 }
 
 void sort_list(lkdlist **head){
-    if(isEmpty(*head)){
-        printf("No Element Found.\n");
+    if(!*head){
         return;
     }
-    lkdlist *temp = *head, *prev, *new_head = NULL;
-    while(temp){
-        sort_push(&new_head,temp->data);
-        prev = temp;
-        temp = temp->next;
-        free(prev);
+    lkdlist *temp = *head;
+    int isSorted = 1;
+    int x = 0;
+    while(isSorted){
+        isSorted = 1;
+        while(temp->next){
+            if(temp->data > temp->next->data){
+                x = temp->data;
+                temp->data = temp->next->data;
+                temp->next->data = x;
+                isSorted++;
+            }
+            temp = temp->next;
+        }
+        isSorted--;
+        temp = *head;
     }
-    *head = new_head;
-    free(temp);
 }
+
+// void sort_list(lkdlist **head){
+//     if(isEmpty(*head)){
+//         printf("No Element Found.\n");
+//         return;
+//     }
+//     lkdlist *temp = *head, *prev, *new_head = NULL;
+//     while(temp){
+//         sort_push(&new_head,temp->data);
+//         prev = temp;
+//         temp = temp->next;
+//         free(prev);
+//     }
+//     *head = new_head;
+//     free(temp);
+// }
 
 void reverse_list(lkdlist **head){
     if(!(*head)){

@@ -7,10 +7,8 @@ int main(){
         push_top(&st1,i);
     }
     display(st1);
-    lkdlist *st2 = st1;
-    st1 = NULL;
+    sort_list(&st1);
     display(st1);
-    display(st2);
     if(isExist(st1,10)){
         printf("Element Found.");
     }else{
