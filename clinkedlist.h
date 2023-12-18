@@ -118,11 +118,7 @@ void push_bottom(cl_list **head, int new_data){
 }
 
 void sort_push(cl_list **head, int new_data){
-    if(!*head){
-        push_top(head,new_data);
-        return;
-    }
-    if(new_data <= (*head)->data){
+    if(!*head && new_data <= (*head)->data){
         push_top(head,new_data);
         return;
     }
