@@ -62,6 +62,28 @@ int count(cdl_list *head, int key){
     return count;
 }
 
+int item_at(cdl_list *head, int index){
+    int l = len(head);
+    if(index >= l){
+        printf("Index out of range.\n");
+        return -1;
+    }
+    int count = 1;
+    while(count <= index){
+        head = head->next;
+        count++;
+    }
+    return head->data;
+}
+
+int top(cdl_list *head){
+    return head->data;
+}
+
+int bottom(cdl_list *head){
+    return head->prev->data;
+}
+
 void push(cdl_list **head, int new_data, int index){
     int l = len(*head);
     if(l < index || index < 0){

@@ -26,5 +26,7 @@ void main(){
         }
     }
     printf("%d\n",count(ll1, 10));
+    printf("index %d is %d\n",0,item_at(ll1,6));
+    printf("The top and bottom of this list is %d, %d\n",top(ll1),bottom(ll1));
     display(ll1);
 }
