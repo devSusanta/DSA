@@ -1,40 +1,40 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct Tree{
+typedef struct Binary_Tree{
     int data;
-    struct Tree *l;
-    struct Tree *r;
-}tree;
+    struct Binary_Tree *l;
+    struct Binary_Tree *r;
+}btree;
 
-tree *lChild(tree *t){
+btree *lChild(btree *t){
     return t->l;
 }
-tree *rChild(tree *t){
+btree *rChild(btree *t){
     return t->r;
 }
 
-void add(tree **t, int new_data){
-    tree *new_tree = (tree*)malloc(sizeof(tree));
-    new_tree->data = new_data;
-    new_tree->l = NULL;
-    new_tree->r = NULL;
-    *t = new_tree;
+void add(btree **t, int new_data){
+    btree *new_btree = (btree*)malloc(sizeof(btree));
+    new_btree->data = new_data;
+    new_btree->l = NULL;
+    new_btree->r = NULL;
+    *t = new_btree;
 }
 
-void delete(tree **t){
+void delete(btree **t){
     (*t)->r = NULL;
     (*t)->l = NULL;
     (*t) = NULL;
 }
 
-void display(tree *t){
+void display(btree *t){
     if(!t){
         printf("No Element Found\n");
         return;
     }
-    tree *l = t->l;
-    tree *r = t->r;
+    btree *l = t->l;
+    btree *r = t->r;
     if(l == NULL){
         if(r == NULL){
             printf("%d (0,0)",t->data);
@@ -50,7 +50,7 @@ void display(tree *t){
     return;
 }
 
-void inorderTraversal(tree* root) {
+void inorderTraversal(btree* root) {
     if (root) {
         display(root);
         inorderTraversal(root->l);
@@ -60,7 +60,7 @@ void inorderTraversal(tree* root) {
 }
 
 void main(){
-    tree *t1 = NULL;
+    btree *t1 = NULL;
     add(&t1,1);
     add(&t1->l,2);
     add(&t1->r,3);
@@ -70,13 +70,5 @@ void main(){
     add(&t1->r->r,7);
     add(&t1->l->l->r,8);
     add(&t1->r->r->l,9);
-    // delete(&t1->r);
-    // display(t1);
-    // display(t1->r);
-    // display(t1->r);
-    // display(t1->l->l);
-    // display(t1->l->r);
-    // display(t1->r->l);
-    // display(t1->r->r);
     inorderTraversal(t1);
 }
