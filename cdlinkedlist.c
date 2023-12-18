@@ -14,5 +14,17 @@ void main(){
     push(&ll1,123,8);
     printf("The len of this list is %d\n",len(ll1));
     display(ll1);
-    displayr(ll1);
+    pop_top(&ll1);
+    display(ll1);
+    pop_bottom(&ll1);
+    display(ll1);
+    pop_at(&ll1,2);
+    display(ll1);
+    for(int i = 0; i < 301; i++){
+        if(isExist(ll1, i)){
+            printf("%d is Exist in this List.\n",i);
+        }
+    }
+    printf("%d\n",count(ll1, 10));
+    display(ll1);
 }
