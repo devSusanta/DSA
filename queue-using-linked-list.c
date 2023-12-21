@@ -24,6 +24,25 @@ queue create(){
     return q;
 }
 
+int len(queue q){
+    if(!q.front){
+        return 0;
+    }
+    int count = 1;
+    while(q.rear != q.front){
+        count++;
+        q.rear = q.rear->next;
+    }
+    return count;
+}
+
+int isEmpty(queue q){
+    if(q.front){
+        return 0;
+    }
+    return 1;
+}
+
 void enQueue(queue *q, int new_data){
     node* new_node = (node*)malloc(sizeof(node));
     new_node->data = new_data;
@@ -79,7 +98,7 @@ void main(){
     int op;
     queue q = create();
     while(1){
-        printf("1. enQueue, 2. deQueue, 3. Display, 4. Exit.\nEnter Your Choice: ");
+        printf("1. enQueue, 2. deQueue, 3. Display, 4. Size, 5. Rear, 6. Front, 7. Exit.\nEnter Your Choice: ");
         scanf("%d",&op);
         switch(op){
             case 1:
@@ -95,6 +114,15 @@ void main(){
                 display(q);
                 break;
             case 4:
+                printf("The len of this Queue is %d\n",len(q));
+                break;
+            case 5:
+                printf("The Rear of this Queue is %d\n",rear(q));
+                break;
+            case 6:
+                printf("The Front of this Queue is %d\n",front(q));
+                break;
+            case 7:
                 printf("Oops..");
                 return;
             default:
