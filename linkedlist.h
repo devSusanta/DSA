@@ -90,6 +90,28 @@ void push_bottom(lkdlist **head, int new_data){
     push(head,new_data,l);
 }
 
+void scan_char(lkdlist **head){
+    int c = 0;
+    while(c != 10){
+        scanf("%c",&c);
+        push_top(head,c);
+    }
+}
+
+// void save_file(lkdlist *head, char filename[100]){
+//     int l = len(head);
+//     FILE *file = fopen(filename, "w");
+//     if(file == NULL){
+//         printf("Error while opening the file.\n");
+//         return;
+//     }
+//     while(l != 0){
+//         char c = item_at(head,l-1);
+//         fputc(c, file);
+//         l--;
+//     }
+// }
+
 void sort_push(lkdlist **head, int new_data){
     lkdlist *new_node = (lkdlist*)malloc(sizeof(lkdlist));
     new_node->data = new_data;
@@ -200,6 +222,13 @@ void display(lkdlist *head) {
         head = head->next;
     }
     printf("NULL\n");
+}
+
+void displayc(lkdlist *head){
+    if(head != NULL){
+        displayc(head->next);
+        printf("%c",head->data);
+    }
 }
 
 int isExist(lkdlist *head, int key){
