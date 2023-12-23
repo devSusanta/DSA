@@ -158,3 +158,39 @@ void main(){
         }
     }
 }
+
+/*OUTPUT
+PS S:\WorkSpace\CollegeWork\DataStructure> gcc .\dequeue-using-linekd-list.c
+PS S:\WorkSpace\CollegeWork\DataStructure> ./a
+1. enQueueR, 2. enQueueF, 3. deQueueR, 4. deQueueF, 5. Display, 6. Size, 7. Rear, 8. Front, 9. Exit.
+Enter Your Choice: 1
+Enter the element: 12
+1. enQueueR, 2. enQueueF, 3. deQueueR, 4. deQueueF, 5. Display, 6. Size, 7. Rear, 8. Front, 9. Exit.
+Enter Your Choice: 1
+Enter the element: 13
+1. enQueueR, 2. enQueueF, 3. deQueueR, 4. deQueueF, 5. Display, 6. Size, 7. Rear, 8. Front, 9. Exit.
+Enter Your Choice: 2
+Enter the element: 23
+1. enQueueR, 2. enQueueF, 3. deQueueR, 4. deQueueF, 5. Display, 6. Size, 7. Rear, 8. Front, 9. Exit.
+Enter Your Choice: 5
+13 -> 12 -> 23
+1. enQueueR, 2. enQueueF, 3. deQueueR, 4. deQueueF, 5. Display, 6. Size, 7. Rear, 8. Front, 9. Exit.
+Enter Your Choice: 2
+Enter the element: 34
+1. enQueueR, 2. enQueueF, 3. deQueueR, 4. deQueueF, 5. Display, 6. Size, 7. Rear, 8. Front, 9. Exit.
+Enter Your Choice: 5
+13 -> 12 -> 23 -> 34
+1. enQueueR, 2. enQueueF, 3. deQueueR, 4. deQueueF, 5. Display, 6. Size, 7. Rear, 8. Front, 9. Exit.
+Enter Your Choice: 3
+Removed Rear 13
+1. enQueueR, 2. enQueueF, 3. deQueueR, 4. deQueueF, 5. Display, 6. Size, 7. Rear, 8. Front, 9. Exit.
+Enter Your Choice: 4
+Removed Front 34
+1. enQueueR, 2. enQueueF, 3. deQueueR, 4. deQueueF, 5. Display, 6. Size, 7. Rear, 8. Front, 9. Exit.
+Enter Your Choice: 5
+12 -> 23
+1. enQueueR, 2. enQueueF, 3. deQueueR, 4. deQueueF, 5. Display, 6. Size, 7. Rear, 8. Front, 9. Exit.
+Enter Your Choice: 9
+Oops..
+PS S:\WorkSpace\CollegeWork\DataStructure> 
+*/
