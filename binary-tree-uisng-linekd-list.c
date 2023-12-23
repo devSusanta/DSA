@@ -29,25 +29,18 @@ void delete(btree **t){
 }
 
 void display(btree *t){
-    if(!t){
-        printf("No Element Found\n");
-        return;
-    }
-    btree *l = t->l;
-    btree *r = t->r;
-    if(l == NULL){
-        if(r == NULL){
-            printf("%d (0,0)",t->data);
-        }else{
-            printf("%d (0,%d)",t->data,r->data);
-        }
-    }else if(r == NULL){
-        printf("%d (%d,0)",t->data,l->data);
+    printf("%d (",t->data);
+    if(t->l){
+        printf("%d,",t->l->data);
     }else{
-        printf("%d (%d,%d)",t->data,l->data,r->data);
+        printf("0,");
+    }
+    if(t->r){
+        printf("%d)",t->r->data);
+    }else{
+        printf("0)");
     }
     printf("\n");
-    return;
 }
 
 void preorderTraversal(btree* root) {
