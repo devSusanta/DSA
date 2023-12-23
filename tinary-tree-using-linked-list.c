@@ -59,12 +59,12 @@ void display(ttree *t){
     printf("\n");
 }
 
-void inorderTraversal(ttree *root){
+void preorderTraversal(ttree *root){
     if(root){
         display(root);
-        inorderTraversal(root->l);
-        inorderTraversal(root->m);
-        inorderTraversal(root->r);
+        preorderTraversal(root->l);
+        preorderTraversal(root->m);
+        preorderTraversal(root->r);
     }
 }
 
@@ -84,7 +84,7 @@ void main(){
     add(&t1->r->m,12);
     add(&t1->r->r,13);
     add(&t1->r->r,13);
-    inorderTraversal(t1);
+    preorderTraversal(t1);
 }
 
 /*

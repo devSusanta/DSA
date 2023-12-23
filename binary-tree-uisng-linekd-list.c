@@ -50,11 +50,11 @@ void display(btree *t){
     return;
 }
 
-void inorderTraversal(btree* root) {
+void preorderTraversal(btree* root) {
     if (root) {
         display(root);
-        inorderTraversal(root->l);
-        inorderTraversal(root->r);
+        preorderTraversal(root->l);
+        preorderTraversal(root->r);
         // display(root);
     }
 }
@@ -70,7 +70,7 @@ void main(){
     add(&t1->r->r,7);
     add(&t1->l->l->r,8);
     add(&t1->r->r->l,9);
-    inorderTraversal(t1);
+    preorderTraversal(t1);
 }
 
 /*
