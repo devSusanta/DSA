@@ -72,3 +72,19 @@ void main(){
     add(&t1->r->r->l,9);
     inorderTraversal(t1);
 }
+
+/*
+OUTPUT
+PS S:\WorkSpace\CollegeWork\DataStructure> gcc .\binary-tree-uisng-linekd-list.c
+PS S:\WorkSpace\CollegeWork\DataStructure> ./a
+1 (2,3)
+2 (4,6)
+4 (0,8)
+8 (0,0)
+6 (0,0)
+3 (5,7)
+5 (0,0)
+7 (9,0)
+9 (0,0)
+PS S:\WorkSpace\CollegeWork\DataStructure>
+*/
