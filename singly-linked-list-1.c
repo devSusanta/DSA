@@ -8,14 +8,14 @@ struct node {
 
 struct node *head = NULL;
 
-void insert(int new_data) {
+void push(int new_data) {
     struct node *new_node = (struct node *)malloc(sizeof(struct node));
     new_node->data = new_data;
     new_node->next = head;
     head = new_node;
 }
 
-void delete(int key) {
+void pop(int key) {
     struct node *temp = head, *prev;
 
     if (temp != NULL && temp->data == key) {
@@ -48,15 +48,15 @@ void display() {
 }
 
 int main() {
-    insert(3);
-    insert(1);
-    insert(7);
-    insert(2);
+    push(3);
+    push(1);
+    push(7);
+    push(2);
 
     printf("Linked list: ");
     display();
 
-    delete(1);
+    pop(1);
 
     printf("\nLinked list after deletion: ");
     display();
