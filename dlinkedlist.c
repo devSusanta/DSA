@@ -9,4 +9,3 @@ void main(){
     printf("the len of this doubly linked list is %d\n",len(ll1));
     display(ll1);
 }
-
