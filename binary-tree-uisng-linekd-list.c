@@ -52,6 +52,13 @@ void preorderTraversal(btree* root) {
     }
 }
 
+int size(btree* root) {
+    if (root == NULL)
+        return 0;
+    else
+        return size(root->l) + 1 + size(root->r);
+}
+
 void main(){
     btree *t1 = NULL;
     add(&t1,1);
@@ -64,6 +71,7 @@ void main(){
     add(&t1->l->l->r,8);
     add(&t1->r->r->l,9);
     preorderTraversal(t1);
+    printf("%d is the height.",size(t1));
 }
 
 /*

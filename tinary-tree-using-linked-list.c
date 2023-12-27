@@ -54,6 +54,13 @@ void preorderTraversal(ttree *root){
     }
 }
 
+int size(ttree* root) {
+    if (root == NULL)
+        return 0;
+    else
+        return size(root->l) + 1 + size(root->r) + size(root->m);
+}
+
 void main(){
     ttree *t1 = NULL;
     add(&t1,1);
@@ -70,6 +77,7 @@ void main(){
     add(&t1->r->m,12);
     add(&t1->r->r,13);
     preorderTraversal(t1);
+    printf("The size of the tree is %d",size(t1));
 }
 
 /*

@@ -1,3 +1,4 @@
+//circular queue implementation using array.
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -14,7 +15,7 @@ void display();
 int main(){
     int op,x;
     while(1){
-        printf("1.Enqueue\n2.Dequeue\n3.Display\n4.Exit\nEnter Your choice: ");
+        printf("1.Enqueue, 2.Dequeue, 3.Display, 4.Exit.\nEnter Your choice: ");
         scanf("%d",&op);
         switch(op){
             case 1:

@@ -16,6 +16,7 @@ void selectionSort(int arr[], int n)
             swap(arr[min_idx], arr[i]);
     }
 }
+
 int main()
 {
     int arr[] = { 1, 2, 18, 9, 6, 244, 24, 23, 0, -11, 27 };
