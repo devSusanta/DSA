@@ -1,3 +1,4 @@
+//implement doubly linked list datastructure in c using structure.
 #include <stdio.h>
 #include <stdlib.h>
 

@@ -6,7 +6,9 @@ void main(){
     for(int i = 0; i < n; i+=2){
         push_top(&ll1,i);
     }
+    for(int i = 1; i < n; i+=2){
+        push_top(&ll2,i);
+    }
     display(ll1);
-    sort_list(&ll1);
-    display(ll1);
+    display(ll2);
 }
