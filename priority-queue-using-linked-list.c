@@ -29,14 +29,14 @@ void enQueue(queue *q, int new_data, int priority){
     node* new_node = (node*)malloc(sizeof(node));
     new_node->data = new_data;
     new_node->priority = priority;
-    if(q->rear == NULL || q->rear->priority > priority){
+    if(q->rear == NULL){
         new_node->next = q->rear;
         q->front = new_node;
         q->rear = new_node;
         return;
     }
 
-    node *temp = q->rear, *prev;
+    node *temp = q->rear, *prev = NULL;
 
     while(temp != NULL && temp->priority < priority){
         prev = temp;
@@ -48,8 +48,13 @@ void enQueue(queue *q, int new_data, int priority){
         q->front = new_node;
         return;
     }
-    prev->next = new_node;
     new_node->next = temp;
+    if(prev == NULL){
+        q->rear = new_node;
+        return;
+    }
+    prev->next = new_node;
+
 }
 
 int deQueue(queue *q){
