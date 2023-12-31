@@ -97,5 +97,6 @@ PS S:\WorkSpace\CollegeWork\DataStructure> ./a
 11 (0,0,0)
 12 (0,0,0)
 13 (0,0,0)
+The size of the tree is 13
 PS S:\WorkSpace\CollegeWork\DataStructure>
 */
