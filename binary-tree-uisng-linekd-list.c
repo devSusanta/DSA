@@ -8,13 +8,6 @@ typedef struct Binary_Tree{
     struct Binary_Tree *r;
 }btree;
 
-btree *lChild(btree *t){
-    return t->l;
-}
-btree *rChild(btree *t){
-    return t->r;
-}
-
 void add(btree **t, int new_data){
     btree *new_btree = (btree*)malloc(sizeof(btree));
     new_btree->data = new_data;
@@ -23,25 +16,8 @@ void add(btree **t, int new_data){
     *t = new_btree;
 }
 
-void delete(btree **t){
-    (*t)->r = NULL;
-    (*t)->l = NULL;
-    (*t) = NULL;
-}
-
 void display(btree *t){
-    printf("%d (",t->data);
-    if(t->l){
-        printf("%d,",t->l->data);
-    }else{
-        printf("0,");
-    }
-    if(t->r){
-        printf("%d)",t->r->data);
-    }else{
-        printf("0)");
-    }
-    printf("\n");
+    printf("%d ",t->data);
 }
 
 void preorderTraversal(btree* root) {
@@ -49,15 +25,23 @@ void preorderTraversal(btree* root) {
         display(root);
         preorderTraversal(root->l);
         preorderTraversal(root->r);
-        // display(root);
     }
 }
 
-int size(btree* root) {
-    if (root == NULL)
-        return 0;
-    else
-        return size(root->l) + 1 + size(root->r);
+void inorderTraversal(btree* root) {
+    if (root) {
+        preorderTraversal(root->l);
+        display(root);
+        preorderTraversal(root->r);
+    }
+}
+
+void postorderTraversal(btree* root) {
+    if (root) {
+        preorderTraversal(root->l);
+        preorderTraversal(root->r);
+        display(root);
+    }
 }
 
 void main(){
@@ -71,22 +55,10 @@ void main(){
     add(&t1->r->r,7);
     add(&t1->l->l->r,8);
     add(&t1->r->r->l,9);
+    printf("PreOrder: ");
     preorderTraversal(t1);
-    printf("%d is the height.",size(t1));
+    printf("\nInorder: ");
+    inorderTraversal(t1);
+    printf("\nPostOrder: ");
+    postorderTraversal(t1);
 }
-
-/*
-OUTPUT
-PS S:\WorkSpace\CollegeWork\DataStructure> gcc .\binary-tree-uisng-linekd-list.c
-PS S:\WorkSpace\CollegeWork\DataStructure> ./a
-1 (2,3)
-2 (4,6)
-4 (0,8)
-8 (0,0)
-6 (0,0)
-3 (5,7)
-5 (0,0)
-7 (9,0)
-9 (0,0)
-PS S:\WorkSpace\CollegeWork\DataStructure>
-*/
