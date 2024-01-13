@@ -1,3 +1,4 @@
+//implement binary tree using linnked list.
 #include <stdio.h>
 #include <stdlib.h>
 
