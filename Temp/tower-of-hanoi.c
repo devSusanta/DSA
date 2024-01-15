@@ -13,6 +13,6 @@ void towerOfHanoi(int n, char A, char B, char C){
 
 void main(){
     int n = 3;
-    //A where all the disks are present C where we have to move all disk and B for help disk.
+    //A where all the disks are present C where we have to move all disk and B for help.
     towerOfHanoi(n,'A','C','B');
 }

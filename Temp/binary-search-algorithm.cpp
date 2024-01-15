@@ -1,15 +1,6 @@
 //write the binary search algorithm.
-
 #include <iostream>
 using namespace std;
-
-int binarysearch(int arr[], int k, int n);
-
-int main(){
-    int arr[] = {10,11,12,14,19,20,23,28,30};
-    cout << "The element 19 is found at the index of " << binarysearch(arr,19,9);
-    return 0;
-}
 
 int binarysearch(int arr[], int k, int n) {
     // code here
@@ -29,10 +20,8 @@ int binarysearch(int arr[], int k, int n) {
     return -1;
 }
 
-/*OUTPUT
-
-PS S:\WorkSpace\CollegeWork\DataStructure> g++ .\binary-search-algorithm.cpp
-PS S:\WorkSpace\CollegeWork\DataStructure> ./a
-The element 19 is found at the index of 4
-PS S:\WorkSpace\CollegeWork\DataStructure> 
-*/
+int main(){
+    int arr[] = {10,11,12,14,19,20,23,28,30};
+    cout << "The element 19 is found at the index of " << binarysearch(arr,19,9);
+    return 0;
+}

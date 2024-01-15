@@ -22,7 +22,7 @@ int main()
     int arr[] = { 1, 2, 18, 9, 6, 244, 24, 23, 0, -11, 27 };
     int n = sizeof(arr) / sizeof(arr[0]);
     selectionSort(arr, n);
-    cout << "Sorted array: \n";
+    cout << "Sorted array: ";
     int i;
     for (i = 0; i < n; i++) {
         cout << arr[i] << " ";

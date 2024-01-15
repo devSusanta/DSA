@@ -1,4 +1,4 @@
-//write a program to implement queue using linnked list.
+//write a program to implement queue using linked list.
 
 #include <stdio.h>
 #include <stdlib.h>

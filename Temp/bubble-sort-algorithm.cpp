@@ -19,6 +19,7 @@ int main(){
     int arr[] = {10,11,18,12,1,190,180,100,80,90,60};
     int n = sizeof(arr)/sizeof(arr[0]);
     bubbleSort(arr,n);
+    printf("Sorted Array: ");
     for(int i = 0; i < n; i++){
         cout << arr[i];
         if(i != n-1){
