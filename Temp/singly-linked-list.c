@@ -1,5 +1,4 @@
 //implement singly linked list with the basic function of it.
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -50,29 +49,12 @@ void push_at(lkdlist **head, int new_data, int index){
 }
 
 void push_top(lkdlist **head, int new_data) {
-    // push_at(head,new_data,0);
-    lkdlist *new_node = (lkdlist*)malloc(sizeof(lkdlist));
-    new_node->data = new_data;
-    new_node->next = *head;
-    *head = new_node;
+    push_at(head,new_data,0);
 }
 
 void push_bottom(lkdlist **head, int new_data){
-    // int l = len(*head);
-    // push_at(head,new_data,l);
-    lkdlist *new_node = (lkdlist*)malloc(sizeof(lkdlist));
-    new_node->data = new_data;
-    if(!*head){
-        new_node->next = *head;
-        *head = new_node;
-        return;
-    }
-    new_node->next = NULL;
-    lkdlist *temp = *head;
-    while(temp->next){
-        temp = temp->next;
-    }
-    temp->next = new_node;
+    int l = len(*head);
+    push_at(head,new_data,l);
 }
 
 int pop_at(lkdlist **head, int index){
@@ -108,33 +90,12 @@ int pop_at(lkdlist **head, int index){
 }
 
 int pop_top(lkdlist **head) {
-    int data = (*head)->data; 
-    lkdlist *temp = (*head);
-    (*head) = (*head)->next;
-    free(temp);
-    return data;
+    pop_at(head,0);
 }
 
 int pop_bottom(lkdlist **head){
-    if(isEmpty(*head)){
-        return -1;
-    }
-
-    if (!(*head)->next) {
-        int data = (*head)->data;
-        *head = NULL;
-        return data;
-    }
-
-    lkdlist *temp = *head;
-    while (temp->next->next) {
-        temp = temp->next;
-    }
-
-    int data = temp->next->data;
-    free(temp->next);
-    temp->next = NULL;
-    return data;
+    int l = len(*head);
+    pop_at(head,l-1);
 }
 
 void display(lkdlist *head) {
@@ -197,7 +158,7 @@ void main(){
                 }
                 break;
             case 7:
-                printf("%d\n",len(ll1));
+                printf("The length of the list is %d.\n",len(ll1));
                 break;
             case 8:
                 display(ll1);
