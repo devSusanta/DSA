@@ -110,6 +110,23 @@ void displaylist(list *head) {
     printf("\n");
 }
 
+void displayExp(list *head) {
+    while (head != NULL) {
+        if(head->op == '1'){
+            long num = head->data;
+            if(num < head->data){
+                printf("%.2f ",head->data);
+            }else{
+                printf("%d ",num);
+            }
+        }else{
+            printf("%c ", head->op);
+        }
+        head = head->next;
+    }
+    printf("\n");
+}
+
 // void displayc(cstack *head) {
 //     while (head->next != NULL) {
 //         printf("%c", head->data);
@@ -282,13 +299,14 @@ void infixToPostfix(list **l){
 
 void main(){
     cstack *st1 = NULL;
+    printf("Enter the Infix Expression: ");
     scan_char(&st1);
     list *l1 = charToList(st1);
     printf("Your Infix Expression is:\n");
-    displaylist(l1);
+    displayExp(l1);
     printf("The Postfix Version of the Expression is:\n");
     infixToPostfix(&l1);
-    displaylist(l1);
+    displayExp(l1);
     // if(checkInfixChars(st1)){
     //     printf("Valid Input.");
     // }else{
