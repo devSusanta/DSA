@@ -1,8 +1,6 @@
 //write a program to implement queue using two stack.
-
 #include <stdio.h>
 #include <stdlib.h>
-// #define enqueue(x,y); push(x,y);
 
 typedef struct Stack{
     int data;
