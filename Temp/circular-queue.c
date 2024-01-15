@@ -1,53 +1,50 @@
 //write a program to implement circular queue using array.
-
 #include <stdio.h>
-#define max 10
-int queue[max], rear = -1, front = -1;
+#define MAX 10
+int queue[MAX], rear = -1, front = -1;
 
 int isEmpty(){
     return (rear == -1);
 }
-int isFull(){
-    return (rear+1)%max == front;
-}
+
 int len(){
+    if(rear == -1){
+        return 0;
+    }
     int l = rear - front + 1; 
     if(rear < front){
-        max + l;
+        l = MAX + l;
     }
     return l; 
 }
 
+int isFull(){
+    return len()==MAX;
+}
+
 void enqueue(int data){
-    rear %= max;
-    front %= max;
-    queue[++rear] = data;
+    if(isFull()){
+        printf("Queue is Full.\n");
+        return;
+    }
+
+    rear = (rear + 1) % MAX;
+    queue[rear] = data;
+
     if(front == -1)
         front++;
 }
 
 int dequeue(){
-    int data = queue[front++];
-    if(rear == front-1)
+    if(isEmpty()){
+        printf("Queue is Empty.\n");
+        return -1;
+    }
+    int data = queue[front];
+    front++;
+    if(rear+1 == front)
         rear = front = -1;
     return data;
-}
-
-void displsay(){
-    if(rear == -1){
-        printf("Empty Queue.\n");
-        return;
-    }
-    int i = front;
-    while(i <= rear){
-        printf("%d",queue[i]);
-        i++;
-        if(i > rear){
-            break;
-        }
-        printf(" -> ");
-    }
-    printf("\n");
 }
 
 void display(){
@@ -61,7 +58,7 @@ void display(){
             printf("%d -> ",queue[i]);
         }
     }else{
-        for(i = front; i < max; i++){
+        for(i = front; i < MAX; i++){
             printf("%d -> ",queue[i]);
         }
         for(i = 0; i <= rear; i++){
@@ -72,44 +69,29 @@ void display(){
 }
 
 void main(){
-    int op;
-    int data;
-    while(1){
-        printf("1. Push, 2. Pop, 3. Display, 4. isEmpty, 5. Length, 6. Exit\nEnter your choice: ");
-        scanf("%d",&op);
-        switch(op){
-            case 1:
-                if(isFull()){
-                    printf("Overflow.\n");
-                }else{
-                    printf("Enter the Data: ");
-                    scanf("%d",&data);
-                    enqueue(data);
-                }
-                break;
-            case 2:
-                if(isEmpty())
-                    printf("The Queue is Empty.\n");
-                else
-                    printf("Removed %d.\n",dequeue());
-                break;
-            case 3:
-                display();
-                break;
-            case 4:
-                if(isEmpty())
-                    printf("The Queue is Empty.\n");
-                else
-                    printf("The Queue is not Empty.\n");
-                break;
-            case 5:
-                printf("The Len of the Queue is %d\n",len());
-                break;
-            case 6:
-                printf("Oops.. Program Terminated.");
-                return;
-            default:
-                printf("Invalid Input.\n");
-        }
+    if(isEmpty()){
+        printf("The Queue is empty.\n");
+    }else{
+        printf("The Queue is not empty.\n");
     }
+    printf("The length of the Queue is %d\n",len());
+    enqueue(10);
+    printf("The length of the Queue is %d\n",len());
+    enqueue(102);enqueue(15);enqueue(13);enqueue(12);enqueue(12);enqueue(12);enqueue(102);enqueue(15);enqueue(13);
+    display();
+    printf("The length of the Queue is %d\n",len());
+    if(isFull()){
+        printf("The Queue is Full.\n");
+    }else{
+        printf("The Queue is not Full.\n");
+    }
+    printf("Removed %d\n",dequeue());
+    printf("Removed %d\n",dequeue());
+    printf("Removed %d\n",dequeue());
+    display();
+    enqueue(1063451);
+    enqueue(106);
+    enqueue(104);
+    enqueue(102);
+    display();
 }
