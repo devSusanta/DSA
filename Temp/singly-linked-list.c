@@ -175,7 +175,7 @@ void main(){
                 break;
             case 4:
                 if(ll1){
-                    printf("Removed %d.",pop_top(&ll1));
+                    printf("Removed %d.\n",pop_top(&ll1));
                 }else{
                     printf("Empty List.\n");
                 }
@@ -184,7 +184,7 @@ void main(){
                 printf("Enter the Index: ");
                 scanf("%d",&index);
                 if(ll1){
-                    printf("Removed %d.\n",pop_bottom(&ll1));
+                    printf("Removed %d.\n",pop_at(&ll1,index));
                 }else{
                     printf("Empty List.\n");
                 }
