@@ -53,7 +53,7 @@ void push_char_bottom(cstack **st, char data){
     temp->next = new_node;
 }
 
-char pop(cstack **st){
+char pop_top(cstack **st){
     cstack *temp = *st;
     *st = (*st)->next;
     char data = temp->data;
@@ -207,15 +207,15 @@ void infixToPostfix(list **l){
             }else{
                 if(l1->op == ')'){
                     while(oplist != NULL && oplist->data != '('){
-                        push(&postlist,pop(&oplist),0);
+                        push(&postlist,pop_top(&oplist),0);
                     }
                     if(oplist != NULL && oplist->data == '('){
-                        char garbg = pop(&oplist);
+                        char garbg = pop_top(&oplist);
                     }
                 }else{
                     while(oplist != NULL && opPref(l1->op) <= opPref(oplist->data)){
 
-                        push(&postlist,pop(&oplist),0);
+                        push(&postlist,pop_top(&oplist),0);
                     }
                     push_char_top(&oplist,l1->op);
                 }
@@ -224,7 +224,7 @@ void infixToPostfix(list **l){
         l1 = l1->next;
     }
     while(oplist != NULL){
-        push(&postlist,pop(&oplist),0);
+        push(&postlist,pop_top(&oplist),0);
     }
     *l = postlist;
 }
