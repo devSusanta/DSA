@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 
 typedef struct List{
     double data;
@@ -128,13 +129,13 @@ void displayExp(list *head) {
     printf("\n");
 }
 
-// void displayc(cstack *head) {
-//     while (head->next != NULL) {
-//         printf("%c", head->data);
-//         head = head->next;
-//     }
-//     printf("\n");
-// }
+void displayc(cstack *head) {
+    while (head->next != NULL) {
+        printf("%c", head->data);
+        head = head->next;
+    }
+    printf("\n");
+}
 
 int isNumber(char c){
     return (c >= 48 && c <= 57) || c == 46;
@@ -339,10 +340,34 @@ double evaluate_postfix(list *l1) {
     return stack[top];
 }
 
-void main(){
+void scasn_char(cstack **head){
+    char c;
+    while(1){
+        scanf("%c",&c);
+        if(c == 32){
+            continue;
+        }
+        push_char(head,c);
+        if(c == 10)break;
+    }
+}
+
+void main(int argc, char *argv[]) {
     cstack *st1 = NULL;
-    printf("Enter the Infix Expression(e.g. 10*(-13+17)/1.5-17 ): ");
-    scan_char(&st1);
+
+    if (argc > 1) {
+        for (int i = 1; i < argc; i++) {
+            int len = strlen(argv[i]);
+            for (int j = 0; j < len; j++) {
+                push_char(&st1,argv[i][j]);
+            }
+        }
+        push_char(&st1,'\n');
+        displayc(st1);
+    }else{
+        printf("Enter the Infix Expression(e.g. 10*(-13+17)/1.5-17 ): ");
+        scan_char(&st1);
+    }
     list *l1 = charToList(st1);
     printf("Your Infix Expression is:\n");
     displayExp(l1);
@@ -350,11 +375,6 @@ void main(){
     infixToPostfix(&l1);
     displayExp(l1);
     printf("the result is : %.3lf\n",evaluate_postfix(l1));
-    // if(checkInfixChars(st1)){
-    //     printf("Valid Input.");
-    // }else{
-    //     printf("Invalid Input.");
-    // }
 }
 
 /*
