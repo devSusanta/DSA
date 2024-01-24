@@ -151,10 +151,9 @@ int opPref(char c){
     switch(c){
         case 94:
             return 6;
-        case 37:
-            return 5;
         case 47:
             return 4;
+        case 37:
         case 42:
             return 3;
         case 43:

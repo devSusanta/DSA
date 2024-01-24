@@ -15,14 +15,6 @@ typedef struct charStack{
     struct charStack *next;
 }cstack;
 
-// void push_top(list **l1, char data, double number){
-//     list *new_node = (list*)malloc(sizeof(list));
-//     new_node->data = number;
-//     new_node->op = data;
-//     new_node->next = *l1;
-//     *l1 = new_node;
-// }
-
 void push(list **l1, char op, double number){
     list *new_node = (list*)malloc(sizeof(list));
     new_node->data = number;
@@ -39,12 +31,6 @@ void push(list **l1, char op, double number){
     }
     temp->next = new_node;
 }
-
-// void pop_top(list **l1){
-//     list *temp = *l1;
-//     *l1 = (*l1)->next;
-//     free(temp);
-// }
 
 void push_char_top(cstack **st, char data){
     cstack *new_node = (cstack*)malloc(sizeof(cstack));
@@ -89,13 +75,6 @@ void scan_char(cstack **head){
     }
 }
 
-// void display(cstack *head) {
-//     while (head != NULL) {
-//         printf("%c -> ", head->data);
-//         head = head->next;
-//     }
-//     printf("NULL\n");
-// }
 
 void displaylist(list *head) {
     while (head != NULL) {
@@ -134,7 +113,7 @@ void displayc(cstack *head) {
         printf("%c", head->data);
         head = head->next;
     }
-    printf("\n");
+    // printf("\n");
 }
 
 int isNumber(char c){
@@ -153,10 +132,9 @@ int opPref(char c){
     switch(c){
         case 94:
             return 6;
-        case 37:
-            return 5;
         case 47:
             return 4;
+        case 37:
         case 42:
             return 3;
         case 43:
@@ -169,24 +147,6 @@ int opPref(char c){
             exit(0);
     }
 }
-
-// int isValidChar(char c){
-//     if(isNumber(c) || isOperator(c) || isBrace(c) || c == 46){
-//         return 1;
-//     }
-//     return 0;
-// }
-
-// int checkInfixChars(cstack *st){
-//     while(st->next != NULL){
-//         if(!isValidChar(st->data)){
-//             printf("%c Invalid Input.(%c)\n",st->data,st->data);
-//             return 0;
-//         }
-//         st = st->next;
-//     }
-//     return 1;
-// }
 
 double toNumber(cstack *st){
     double num = 0;
@@ -244,7 +204,7 @@ list* charToList(cstack *st){
                 number = NULL;
             }
             if(c == '-'){
-                if(prev == NULL ||  isOperator(prev->data) || isBrace(prev->data)){
+                if(prev == NULL ||  isOperator(prev->data) || prev->data == '('){
                     push_char(&number,c);
                 }else{
                     push(&l1,c,0);
@@ -309,7 +269,12 @@ double calculate(double num1, char op, double num2){
         case '/':
             return num1 / num2;
         case '%':
-            fmodf(num1,num2);
+            printf("modulo(%%) function is not available.\n");
+            exit(0);
+            // while(num1 >= num2){
+            //     num1 -= num2;
+            // }
+            // return num1;
         case '^':
             return pow(num1,num2);
         default:
@@ -321,7 +286,7 @@ double calculate(double num1, char op, double num2){
 
 double evaluate_postfix(list *l1) {
     // Consider using a stack for storing numbers instead of list nodes
-    double stack[4];  // Adjust MAX_STACK_SIZE as needed
+    double stack[100];  // Adjust MAX_STACK_SIZE as needed
     int top = -1;
     double num1, num2, result;
     while (l1 != NULL) {  // Iterate through all elements
@@ -340,41 +305,150 @@ double evaluate_postfix(list *l1) {
     return stack[top];
 }
 
-void scasn_char(cstack **head){
-    char c;
-    while(1){
-        scanf("%c",&c);
-        if(c == 32){
-            continue;
+
+
+
+int chekcexp(char a,char b, char c){
+    if(b == ' '){
+        if(isOperator(c)){
+            if(c != '-'){
+                return 0;
+            }
         }
-        push_char(head,c);
-        if(c == 10)break;
+        return 1;
     }
+    if(isNumber(b)){
+        if(c == '('){
+            return 0;
+        }
+        return 1;
+    }
+    if(isOperator(b)){
+        if(isOperator(c)){
+            if(c != '-'){
+                return 0;
+            }else{
+                if(isOperator(a) || isBrace(a)){
+                    return 0;
+                }
+            }
+        }
+        if(c == ')' || c == ' '){
+            return 0;
+        }
+        return 1;
+    }
+    if(b == ')'){
+        if(isOperator(a) || isNumber(c)){
+            return 0;
+        }
+    }
+    if(b == '('){
+        if((!isNumber(c) && c != '-') || isNumber(a)){
+            return 0;
+        }
+    }
+    if(!(isNumber(b) || isOperator(b) || isBrace(b))){
+        printf("Invalid Char( %c ).\n",b);
+        return 0;
+    }
+    return 1;
 }
+
+int checkBrace(cstack *temp){
+    char stack[10];
+    int top = -1;
+    while(temp->next != NULL){
+        if(temp->data == '('){
+            stack[++top] = temp->data;
+        }else{
+            if(stack[top--] != '('){
+                return 1;
+            }
+        }
+        temp = temp->next;
+    }
+    if(top != -1){
+        return 1;
+    }
+    return 0;
+}
+
+int checkerror(cstack *head){
+    cstack *temp = NULL;
+    char prev = ' ';
+    char p = ' ';
+    char next = ' ';
+    while(head->next != NULL){
+        prev = p;
+        p = next;
+        next = head->data;
+        if(!chekcexp(prev, p, next)){
+            printf("Expression Error.\n");
+            printf("take a look at this part %c %c %c",prev,p,next);
+            exit(0);
+        }
+        if(isBrace(head->data)){
+            push_char(&temp, head->data);
+        }
+        head = head->next;
+    }
+    prev = p;
+    p = next;
+    next = ' ';
+    if(!chekcexp(prev, p, next)){
+        printf("Expression Error.\n");
+        printf("take a look at the end %c %c %c",prev,p,next);
+        exit(0);
+    }
+
+    push_char(&temp,'\n');
+    if(checkBrace(temp)){
+        displayc(temp);
+        printf("Brackets not Matched Properly");
+        exit(0);
+    }
+    return 0;
+}
+
 
 void main(int argc, char *argv[]) {
     cstack *st1 = NULL;
-
+    int isVer = 0;
     if (argc > 1) {
-        for (int i = 1; i < argc; i++) {
+        int errorindex = 0;
+        if(argv[1][0] == '-' && (argv[1][1] == 'v' || argv[1][1] == 'V')){
+            if(strlen(argv[1]) == 2){
+                isVer = 1;
+            }
+        }
+        for (int i = 1+isVer; i < argc; i++) {
             int len = strlen(argv[i]);
             for (int j = 0; j < len; j++) {
                 push_char(&st1,argv[i][j]);
             }
         }
         push_char(&st1,'\n');
-        displayc(st1);
+        // displayc(st1);
     }else{
         printf("Enter the Infix Expression(e.g. 10*(-13+17)/1.5-17 ): ");
         scan_char(&st1);
     }
+    //error check.
+    checkerror(st1);
+
     list *l1 = charToList(st1);
-    printf("Your Infix Expression is:\n");
-    displayExp(l1);
-    printf("The Postfix Version of the Expression is:\n");
+    if(isVer){
+        printf("Your Infix Expression is:\n");
+        displayExp(l1);
+    }
     infixToPostfix(&l1);
-    displayExp(l1);
-    printf("the result is : %.3lf\n",evaluate_postfix(l1));
+    if(isVer){
+        printf("The Postfix Version of the Expression is:\n");
+        displayExp(l1);
+    }
+    displayc(st1);
+    printf(" : %.3lf\n",evaluate_postfix(l1));
 }
 
 /*
