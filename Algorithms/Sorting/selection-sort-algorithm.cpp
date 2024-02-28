@@ -17,25 +17,34 @@ void selectionSort(int arr[], int n)
     }
 }
 
-int main()
-{
-    int arr[] = { 1, 2, 18, 9, 6, 244, 24, 23, 0, -11, 27 };
-    int n = sizeof(arr) / sizeof(arr[0]);
-    selectionSort(arr, n);
-    cout << "Sorted array: \n";
-    int i;
-    for (i = 0; i < n; i++) {
+void printArray(int arr[], int n){
+    for (int i = 0; i < n; i++) {
         cout << arr[i] << " ";
     }
-    return 0;
+    cout << endl;
 }
 
-/*
-OUTPUT
+void scanArray(int arr[], int n){
+    cout << "Enter elements of the Array: ";
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+}
 
-PS S:\WorkSpace\CollegeWork\DataStructure> g++ .\selection-sort-algorithm.cpp
-PS S:\WorkSpace\CollegeWork\DataStructure> ./a  
-Sorted array: 
--11 0 1 2 6 9 18 23 24 27 244 
-PS S:\WorkSpace\CollegeWork\DataStructure> 
-*/
+int main()
+{
+    cout << "Enter the size of the Array: ";
+    int n;
+    cin >> n;
+    int arr[n];
+    scanArray(arr, n);
+
+    cout << "The Array before sort: ";
+    printArray(arr, n);
+    
+    selectionSort(arr, n);
+
+    cout << "Sorted Array: ";
+    printArray(arr, n);
+    return 0;
+}
